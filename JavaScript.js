@@ -1,12 +1,12 @@
 
-// מערך שמכיל את תמונות המאפים לפי סדר האפשרויות בטופס.
+// מערך תמונות הקינוחים לפי סדר האפשרויות בתפריט.
 let radioImages = [
     document.getElementById("cakeImage"),
     document.getElementById("cookiesImage"),
     document.getElementById("pastryImage")
 ];
 
-// מערך שמכיל את תמונות התוספות לפי סדר האפשרויות בטופס.
+// מערך תמונות התוספות לפי סדר האפשרויות בתפריט.
 let checkboxImages = [
     document.getElementById("chocolateImage"),
     document.getElementById("fruitImage"),
@@ -14,11 +14,9 @@ let checkboxImages = [
     document.getElementById("creamImage")
 ];
 
-// הערך ‎-1 מציין שעדיין לא נבחר קינוח.
+// -1 מציין שעדיין לא נבחר קינוח.
 let selectedRecipe = -1;
 
-// שמות הקינוחים ונתיבי התמונות שלהם.
-// כל התמונות נמצאות בתיקייה הראשית של האתר.
 let recipeNames = ["עוגה", "עוגיות", "מאפה"];
 let recipeFiles = ["cake.png", "cookies.png", "pastry.png"];
 
@@ -32,7 +30,12 @@ let additionFiles = [
 
 let checkboxIds = ["chocolate", "fruit", "nuts", "cream"];
 
-// הסתרת תמונות הקינוחים והצגת תמונות התוספות בחצי שקיפות.
+// יצירת כתובת מלאה לתמונה בהתאם למיקום האתר.
+function getImageUrl(fileName) {
+    return new URL(fileName, document.baseURI).href;
+}
+
+// הגדרת מראה התמונות בפתיחת האתר.
 function setInitialImages() {
     for (let i = 0; i < radioImages.length; i++) {
         radioImages[i].style.display = "none";
@@ -56,7 +59,7 @@ function showRecipe(index) {
     updateOrder();
 }
 
-// שינוי שקיפות תמונת התוספת בהתאם לבחירה.
+// שינוי שקיפות תמונת התוספת לפי מצב תיבת הסימון.
 function changeAddition(index, checkboxId) {
     let checkbox = document.getElementById(checkboxId);
 
@@ -67,7 +70,7 @@ function changeAddition(index, checkboxId) {
     }
 }
 
-// הפעלת כפתור האישור רק לאחר הזנת שם ובחירת קינוח.
+// כפתור האישור פעיל רק אם הוזן שם ונבחר קינוח.
 function checkForm() {
     let name = document.getElementById("userName").value.trim();
 
@@ -75,35 +78,35 @@ function checkForm() {
         name === "" || selectedRecipe === -1;
 }
 
-// עדכון פתק ההזמנה לפי בחירות המשתמש.
+// עדכון פתק ההזמנה לפי הבחירות.
 function updateOrder() {
     let name = document.getElementById("userName").value.trim();
     let recipeText = document.getElementById("orderRecipe");
     let recipeImage = document.getElementById("orderRecipeImage");
 
-    // הצגת השם בפתק ההזמנה.
+    // הצגת שם המשתמש.
     document.querySelector(".name-label").textContent =
         name !== "" ? "שם: " + name : "שם:";
 
-    // הצגת הקינוח שנבחר או הודעה אם עדיין לא נבחר קינוח.
+    // הצגת הקינוח שנבחר בפתק.
     if (selectedRecipe === -1) {
         recipeText.textContent = "עדיין לא נבחר קינוח";
         recipeImage.hidden = true;
         recipeImage.removeAttribute("src");
     } else {
         recipeText.textContent = recipeNames[selectedRecipe];
-        recipeImage.src = recipeFiles[selectedRecipe];
+        recipeImage.src = getImageUrl(recipeFiles[selectedRecipe]);
         recipeImage.alt = "תמונה של " + recipeNames[selectedRecipe];
         recipeImage.hidden = false;
     }
 
-    // ניקוי אזור התוספות לפני עדכונו.
+    // ניקוי אזור התוספות בפתק.
     let additionsArea = document.getElementById("orderAdditions");
     additionsArea.textContent = "";
 
     let anySelected = false;
 
-    // הצגת התמונות והשמות של התוספות שנבחרו בלבד.
+    // הצגת התוספות שנבחרו בלבד.
     for (let i = 0; i < checkboxIds.length; i++) {
         if (document.getElementById(checkboxIds[i]).checked) {
             anySelected = true;
@@ -112,7 +115,7 @@ function updateOrder() {
             item.className = "order-addition";
 
             let image = document.createElement("img");
-            image.src = additionFiles[i];
+            image.src = getImageUrl(additionFiles[i]);
             image.alt = "תמונה של " + additionNames[i];
 
             let caption = document.createElement("span");
@@ -124,7 +127,7 @@ function updateOrder() {
         }
     }
 
-    // הודעה כאשר המשתמש לא בחר תוספות.
+    // הודעה אם לא נבחרו תוספות.
     if (!anySelected) {
         let empty = document.createElement("span");
         empty.className = "empty-note";
@@ -142,7 +145,6 @@ function confirmForm() {
         return;
     }
 
-    // איסוף התוספות שנבחרו.
     let selectedAdditions = [];
 
     for (let i = 0; i < checkboxIds.length; i++) {
@@ -151,7 +153,6 @@ function confirmForm() {
         }
     }
 
-    // בניית הודעת האישור.
     let message =
         "שלום " + name + "! בחרתם: " +
         recipeNames[selectedRecipe] + ". ";
@@ -172,7 +173,7 @@ function closePopup() {
     document.getElementById("confirmationPopup").style.display = "none";
 }
 
-// הפעלת ההגדרות ועדכון הפתק בטעינת האתר.
+// הפעלת ההגדרות הראשוניות.
 setInitialImages();
 updateOrder();
 checkForm();
