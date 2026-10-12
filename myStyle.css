@@ -1,0 +1,38 @@
+* { box-sizing: border-box; }
+body { direction: rtl; margin: 0; padding: 28px; font-family: Arial, sans-serif; color: #563722; background-color: #765034; background-image: repeating-linear-gradient(4deg, rgba(45,25,12,.17) 0 2px, transparent 2px 24px), linear-gradient(90deg,#6d482e,#986b43 45%,#6b452a); }
+#container { max-width: 1180px; margin: 0 auto; text-align: center; }
+h1 { margin: 0 0 8px; color: #fff1d9; font-size: 34px; text-shadow: 0 2px 3px #402512; }
+.subtitle { margin: 0 0 24px; color: #ffebd0; }
+.layout { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 24px; align-items: start; }
+.paper { position: relative; padding: 28px 32px; text-align: center; background: #f8e8c9; border: 1px solid #d7b98d; border-radius: 5px; box-shadow: 0 9px 20px rgba(35,19,8,.3); }
+.order-paper { grid-column: 2; grid-row: 1; background: #f5e5c7; }
+.menu-paper { grid-column: 1; grid-row: 1; }
+.cafe-mark { color: #93643d; letter-spacing: 5px; font-weight: bold; font-size: 14px; }
+.paper h2 { font-size: 29px; margin: 5px 0 14px; }
+.paper h3 { font-size: 19px; margin: 12px 0; }
+.dotted-line { border-top: 2px dotted #c6a77d; margin: 16px 0; }
+.form-section { margin: 12px 0 18px; }
+.choice-list { max-width: 390px; margin: 0 auto; }
+.choice-row { display: flex; direction: rtl; align-items: center; gap: 9px; min-height: 66px; padding: 4px 6px; border-radius: 8px; cursor: pointer; text-align: right; }
+.choice-row:hover { background: rgba(181,132,81,.12); }
+.choice-text { flex: 0 0 94px; font-size: 18px; font-weight: 600; }
+.choice-row img { width: 64px; height: 58px; object-fit: contain; margin: 0; flex: 0 0 64px; }
+.choice-row input { margin-right: auto; accent-color: #784323; width: 18px; height: 18px; cursor: pointer; }
+#userName { width: 65%; max-width: 230px; padding: 9px 10px; border: 1px solid #c9a77c; border-radius: 5px; background: #fff9ec; font-size: 16px; }
+.name-label { font-weight: bold; margin-left: 8px; }
+#confirmButton, #popupContent button { border: 0; border-radius: 7px; padding: 12px 28px; color: #fff3dc; background: #60391f; font-size: 17px; cursor: pointer; }
+#confirmButton:disabled { opacity: .5; cursor: not-allowed; }
+.order-main-image { display: block; width: 190px; height: 145px; object-fit: contain; margin: 0 auto 12px; }
+#orderRecipe { font-size: 17px; margin: 8px; }
+.order-additions { display: flex; justify-content: center; flex-wrap: wrap; gap: 5px; min-height: 75px; align-items: center; }
+.order-addition { width: 75px; font-size: 13px; }
+.order-addition img { width: 65px; height: 52px; display: block; object-fit: contain; margin: 0 auto 3px; }
+.empty-note { color: #9b8064; font-size: 14px; }
+.thanks { font-family: Georgia,serif; font-style: italic; font-size: 22px; color: #93643d; }
+#confirmationPopup { display: none; position: fixed; inset: 0; background: rgba(25,16,10,.65); justify-content: center; align-items: center; z-index: 10; padding: 20px; }
+#popupContent { background: #f8e8c9; padding: 28px; border-radius: 10px; width: 400px; max-width: 100%; text-align: center; box-shadow: 0 8px 30px #241509; }
+#popupContent h2 { margin-top: 0; }
+@media (max-width: 760px) { body { padding: 14px; } .layout { grid-template-columns: 1fr; } .order-paper { grid-column: 1; grid-row: 2; } .menu-paper { grid-column: 1; grid-row: 1; } .paper { padding: 22px 15px; } h1 { font-size: 27px; } }
+
+/* מסתירים תמונות שמסומנות כ-hidden גם כאשר יש להן עיצוב CSS אחר. */
+[hidden] { display: none !important; }

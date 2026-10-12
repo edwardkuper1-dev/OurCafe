@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>בית הקפה שלי</title>
+  <link href="styles/myStyle.css" rel="stylesheet">
+</head>
+<body>
+  <main id="container">
+    <h1>בית הקפה שלנו</h1>
+    <p class="subtitle">בוחרים מאפה, מוסיפים תוספות ונהנים</p>
+    <div class="layout">
+      <section class="paper order-paper" aria-live="polite">
+        <div class="cafe-mark">CAFÉ</div>
+        <h2>ההזמנה שלי</h2>
+        <div class="dotted-line"></div>
+        <label class="name-label" for="userName">שם:</label>
+        <input type="text" id="userName" name="userName" placeholder="הכניסו את שמכם" oninput="checkForm(); updateOrder()">
+        <div class="dotted-line"></div>
+        <h3>הקינוח שלי</h3>
+        <p id="orderRecipe">עדיין לא נבחר קינוח</p>
+        <img id="orderRecipeImage" class="order-main-image" alt="הקינוח שנבחר" hidden>
+        <h3>התוספות שלי</h3>
+        <div id="orderAdditions" class="order-additions"><span class="empty-note">התוספות שבחרתם יופיעו כאן</span></div>
+        <div class="dotted-line"></div>
+        <p class="thanks">תודה שבחרתם בנו!</p>
+      </section>
+
+      <section class="paper menu-paper">
+        <div class="cafe-mark">CAFÉ</div>
+        <h2>התפריט</h2>
+        <div class="dotted-line"></div>
+        <div class="form-section">
+          <h3>1. בחרו קינוח</h3>
+          <div class="choice-list">
+            <label class="choice-row" for="cake"><span class="choice-text">עוגה</span><img id="cakeImage" src="images/cake.png" alt="תמונה של עוגה"><input type="radio" id="cake" name="recipe" value="cake" onclick="showRecipe(0)"></label>
+            <label class="choice-row" for="cookies"><span class="choice-text">עוגיות</span><img id="cookiesImage" src="images/cookies.png" alt="תמונה של עוגיות"><input type="radio" id="cookies" name="recipe" value="cookies" onclick="showRecipe(1)"></label>
+            <label class="choice-row" for="pastry"><span class="choice-text">מאפה</span><img id="pastryImage" src="images/pastry.png" alt="תמונה של מאפה"><input type="radio" id="pastry" name="recipe" value="pastry" onclick="showRecipe(2)"></label>
+          </div>
+        </div>
+        <div class="dotted-line"></div>
+        <div class="form-section">
+          <h3>2. בחרו תוספות</h3>
+          <div class="choice-list">
+            <label class="choice-row" for="chocolate"><span class="choice-text">שוקולד</span><img id="chocolateImage" src="images/chocolate.png" alt="תמונה של שוקולד"><input type="checkbox" id="chocolate" name="addition" value="chocolate" onchange="changeAddition(0, 'chocolate'); updateOrder()"></label>
+            <label class="choice-row" for="fruit"><span class="choice-text">פירות</span><img id="fruitImage" src="images/fruit.png" alt="תמונה של פירות"><input type="checkbox" id="fruit" name="addition" value="fruit" onchange="changeAddition(1, 'fruit'); updateOrder()"></label>
+            <label class="choice-row" for="nuts"><span class="choice-text">אגוזים</span><img id="nutsImage" src="images/nuts.png" alt="תמונה של אגוזים"><input type="checkbox" id="nuts" name="addition" value="nuts" onchange="changeAddition(2, 'nuts'); updateOrder()"></label>
+            <label class="choice-row" for="cream"><span class="choice-text">קצפת</span><img id="creamImage" src="images/cream.png" alt="תמונה של קצפת"><input type="checkbox" id="cream" name="addition" value="cream" onchange="changeAddition(3, 'cream'); updateOrder()"></label>
+          </div>
+        </div>
+        <button type="button" id="confirmButton" disabled onclick="confirmForm()">אישור ההזמנה</button>
+      </section>
+    </div>
+  </main>
+  <div id="confirmationPopup" role="dialog" aria-modal="true" aria-labelledby="popupTitle">
+    <div id="popupContent"><h2 id="popupTitle">ההזמנה שלכם מוכנה!</h2><p id="confirmationText"></p><button type="button" onclick="closePopup()">סגירה</button></div>
+  </div>
+  <script src="jScripts/JavaScript.js"></script>
+</body>
+</html>
